@@ -60,6 +60,45 @@ if (isset($_POST['login'])) {
             border-radius: 15px 15px 0 0 !important;
             border: none;
         }
+        .login-card {
+            margin-top: 100px;
+            border: 1px solid #dee2e6;
+            border-radius: 15px;
+            background: #ffffff;
+            transition: all 0.4s ease; 
+        }
+
+        .login-card:hover {
+            transform: translateY(-10px); 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2) !important; 
+            cursor: pointer;
+        }
+
+        .form-control {
+            border: 2px solid #e9ecef; /* Mas makapal na border para malinis tignan */
+            padding: 12px 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+        }
+
+        /* Hover at Focus Effect para sa inputs */
+        .form-control:hover {
+            border-color: var(--brand-purple);
+        }
+
+        .form-control:focus {
+            background-color: #ffffff;
+            border-color: var(--brand-purple);
+            box-shadow: 0 0 8px rgba(111, 66, 193, 0.2);
+        }
+
+        /* Label styling */
+        .form-label {
+            font-size: 0.9rem;
+            color: #495057;
+            margin-bottom: 0.5rem;
+        }
         .btn-purple {
             /* Purple Button */
             background-color: var(--brand-purple);
@@ -80,6 +119,7 @@ if (isset($_POST['login'])) {
             border-color: var(--brand-purple);
             box-shadow: 0 0 0 0.25rem rgba(111, 66, 193, 0.25);
         }
+        
     </style>
 </head>
 <body>
@@ -102,13 +142,14 @@ if (isset($_POST['login'])) {
                 <div class="card-body p-4">
                     <form method="POST"> 
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Email Address</label>
-                            <input type="email" name="username" class="form-control" placeholder="name@example.com" required>
+                            <div class="mb-3">
+                            <label class="form-label fw-bold">Email Address</label>
+                            <input type="email" name="username" class="form-control" placeholder="example@email.com" required>
                         </div>
 
                         <div class="mb-4">
-                            <label class="form-label fw-semibold">Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="********" required>
+                            <label class="form-label fw-bold">Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Input password" required>
                         </div>
 
                         <div class="d-grid">
@@ -129,6 +170,29 @@ if (isset($_POST['login'])) {
         </div>
     </div>
 </div>
+
+<div id="live-clock" class="position-fixed bottom-0 end-0 p-3 text-white text-end" 
+     style="font-family: sans-serif; line-height: 1;">
+    <div id="date-part" style="font-size: 1.50rem; font-weight: bold; border-left: 2px solid red; padding-left: 10px;"></div>
+    <div id="time-part" style="font-size: 2.5rem; font-weight: bold; margin-top: 5px;"></div>
+</div>
+<script>
+    function updateClock() {
+        const now = new Date();
+        
+        // Format ng petsa: April 23, 2026
+        const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('date-part').textContent = now.toLocaleDateString('en-US', optionsDate);
+        
+        // Format ng oras: 4:20:14 PM
+        document.getElementById('time-part').textContent = now.toLocaleTimeString('en-US');
+    }
+
+    // Patakbuhin kada segundo
+    setInterval(updateClock, 1000);
+    // Tawagin agad pag-load
+    updateClock();
+</script>
 
 </body>
 </html>
